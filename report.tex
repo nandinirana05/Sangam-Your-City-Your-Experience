@@ -1,0 +1,368 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,left=2.0cm,right=2.0cm,top=1.55cm,bottom=1.55cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{setspace}
+\usepackage{seqsplit}
+\usepackage{needspace}
+
+% -------------------------------------------------
+% COLOURS
+% -------------------------------------------------
+\definecolor{TitleBlue}{RGB}{61,103,154}
+
+% -------------------------------------------------
+% GENERAL SETTINGS
+% -------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\renewcommand{\arraystretch}{1.0}
+
+% The supplied document uses a clean sans-serif heading style
+% and italic serif-style explanatory text.
+\newcommand{\blueheading}[1]{%
+    {\sffamily\color{TitleBlue}\fontsize{15}{18}\selectfont #1}%
+}
+
+\newcommand{\bluebigheading}[1]{%
+    {\sffamily\bfseries\color{TitleBlue}\fontsize{16}{19}\selectfont #1}%
+}
+
+\newcommand{\instruction}[1]{%
+    {\itshape\fontsize{10.5}{12.5}\selectfont #1}%
+}
+
+\newcommand{\answerbox}[2][3.0cm]{%
+    \vspace{2pt}
+    \noindent
+    \fbox{%
+        \begin{minipage}[t][#1][t]{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+            \vspace{1mm}
+            \itshape #2
+        \end{minipage}
+    }
+}
+
+% -------------------------------------------------
+% HEADER / FOOTER
+% -------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancyhead[L]{%
+    \sffamily\bfseries\itshape\fontsize{10.5}{12}\selectfont
+    DSCPP-III-2026-T059.
+}
+\fancyhead[R]{%
+    \sffamily\bfseries\fontsize{10.5}{12}\selectfont
+    PROJECT PROPOSAL
+}
+\fancyfoot[R]{%
+    \itshape\fontsize{10}{12}\selectfont
+    Page \thepage
+}
+\setlength{\headheight}{14pt}
+\setlength{\headsep}{23pt}
+\setlength{\footskip}{24pt}
+
+% -------------------------------------------------
+% PAGE 1
+% -------------------------------------------------
+\begin{document}
+
+\vspace*{4mm}
+
+\bluebigheading{PROJECT AND TEAM INFORMATION}
+
+\vspace{13mm}
+
+\blueheading{Project Title}
+
+\vspace{1mm}
+
+
+
+\answerbox[1.0cm]{Sangam : Your City Your Experience}
+
+\vspace{13mm}
+
+\blueheading{Student / Team Information}
+
+\vspace{2mm}
+
+% Team information table
+% Compact 3-member layout
+\noindent
+\begin{tabularx}{\textwidth}{|>{\RaggedRight\arraybackslash}p{0.69\textwidth}|>{\RaggedRight\arraybackslash}X|}
+\hline
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Team Name:}\\[-1mm]
+\textit{Team \#}
+\vspace{1.5mm}
+\end{minipage}
+&
+\begin{minipage}[t]{\linewidth}
+\vspace{1.5mm}
+\textit{Horizen}
+\vspace{1.5mm}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][4.6cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 1 (Team Lead)}\\[-1mm]
+
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][4.6cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Dhasmana, Srishti -- 2510010598}\\
+\textit{\seqsplit{dhasmanasrishti715@gmail.com}}
+
+\vspace{2mm}
+\centering
+\includegraphics[width=2.0cm,height=2.4cm,keepaspectratio]{srishti.jpeg}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][4.6cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 2}\\[-1mm]
+
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][4.6cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Bijalwan, Ishita -- 2510380152}\\
+\textit{\seqsplit{ishitabijalwan.ib@gmail.com}}
+
+\vspace{2mm}
+\centering
+\includegraphics[width=2.0cm,height=2.4cm,keepaspectratio]{ishita.jpeg}
+\end{minipage}
+\\
+\hline
+\begin{minipage}[t][4.4cm][t]{\linewidth}
+\vspace{1.5mm}
+\textbf{Team member 3}\\[-1mm]
+
+\vspace{2.0cm}
+\end{minipage}
+&
+\begin{minipage}[t][4.4cm][t]{\linewidth}
+\vspace{1.5mm}
+\textit{Rana, Nandini -- 2510370024}\\
+\textit{\seqsplit{nr.nandini21@gmail.com}}
+
+\vspace{2mm}
+\centering
+\includegraphics[width=2.0cm,height=2.2cm,keepaspectratio]{nandini.jpeg}
+\end{minipage}
+\\
+\hline
+\end{tabularx}
+
+\newpage
+
+% -------------------------------------------------
+% PAGE 2
+% -------------------------------------------------
+
+\bluebigheading{PROPOSAL DESCRIPTION }
+
+\vspace{12mm}
+
+\needspace{10cm}
+\blueheading{Motivation}
+
+\vspace{3mm}
+
+
+
+\answerbox[8.5cm]{Most of us have opened Google Maps or TripAdvisor in a new city and immediately felt a bit overwhelmed hundreds of pins, no obvious order, and no real sense of what actually fits into a single day without doubling back across town. The tools exist to show you what's around you, but very few of them help you turn a list of places into an actual plan. That gap is the starting point for this project: a platform where a user can mark attractions, hotels, and restaurants on a map and get back a usable route, not just a scattered list of markers.
+ A lot of coursework in data structures and algorithms stays abstract — sorting arrays, traversing trees on paper, timing algorithms against each other in isolation. A city map is one of the few everyday things that is genuinely a graph, and route planning is one of the few everyday problems that genuinely needs a shortest-path algorithm and not just a database query. Building this project is a way to apply DSA concepts to something with an obvious real-world shape, rather than to a textbook example.
+
+
+\vspace{2mm}
+ Existing tools show what’s nearby, but they don’t help turn a list of places into a usable plan. This project aims to fill that gap: a platform where users can mark attractions, hotels, and restaurants on a map and receive an optimized route instead of scattered markers.
+
+\vspace{2mm}
+The personal motivation is to apply data structures and algorithms (DSA) to a real-world problem. A city map is naturally a graph, and route planning genuinely requires shortest-path algorithms, making this project a practical application of DSA concepts.}
+
+\vspace{8mm}
+
+\needspace{7cm}
+\blueheading{State of the Art / Current solution}
+
+\vspace{3mm}
+
+
+
+\answerbox[8cm]{ The tourism and mapping space is dominated by a handful of large, well-established players, each strong in a different part of the problem:
+\vspace{2mm}
+
+Google Maps — excellent point-to-point routing and place data, but it optimises for getting from A to B, not for planning a sequence of stops around what a tourist actually wants to see.
+\vspace{2mm}
+
+TripAdvisor — strong on reviews, ratings, and discovery of attractions, restaurants, and hotels, but weak on route planning; it tells you what's good, not how to see it efficiently.
+\vspace{2mm}
+
+Google Trips(2019) — was arguably the closest attempt at combining discovery and itinerary building, but Google shut it down and folded parts of it into Google Maps' "lists" feature, which is far less structured.
+\vspace{2mm}
+
+What's missing across most of these is a visible, efficient way to solve the actual combinatorial problem underneath itinerary planning given a set of places someone wants to visit, what order minimises time spent travelling between them? 
+Commercial platforms either skip this entirely. This project treats that problem as the centre of the application rather than an afterthought, and builds it explicitly using graph algorithms rather than hiding it behind a general-purpose maps API.}
+
+\vspace{8mm}
+
+\needspace{19cm}
+\blueheading{Project Goals and Milestones}
+
+\vspace{1mm}
+
+
+
+
+
+\answerbox[20.05cm]{The main aim is to develop an interactive, accessible platform that allows tourists to explore a city, mark places of interest, and plan their visits efficiently.
+
+\vspace{3mm}
+To achieve this, the project focuses on the following key points: storing and structuring place data (attractions, hotels, restaurants) in a proper way; enabling quick search of places by name and category; computing optimized routes between selected places, allowing users to browse places by category on an interactive map, and providing a convenient interface to build and manage personalized travel itineraries.
+
+\vspace{3mm}
+The platform is built around the idea that a city, for planning purposes, is essentially a network of connected locations, and travel planning is essentially a routing problem. Rather than presenting the user with an unordered list of pins, as most existing map and review applications do, the system treats the set of places a user wants to visit as a graph problem and computes a sensible order to visit them in, factoring in distance between stops. Users can add places under three categories, view them on a live map, search for a specific place instantly as they type, and generate a day-wise plan that avoids unnecessary backtracking across the city. 
+
+\vspace{3mm}
+The project involves applying core Data Structures and Algorithms. Arrays and vectors will store information about each place, such as name, description, category, and coordinates. Graphs will represent the city map, with places as nodes and routes as weighted edges. Hash tables will enable fast search by keyword, improving the efficiency of search operations. A trie will support instant prefix-based search as the user types. Priority queues will support shortest-path computation (Dijkstra/A*) between places, and a heuristic-based approach will be used for multi-stop itinerary optimization. Linked lists will manage the category groupings, and a lightweight relational database will handle persistence of user data and saved itineraries.
+
+\vspace{3mm}
+\textbf{Planned Milestones}
+\vspace{0.5mm}
+\begin{itemize}[itemsep=1.8mm, topsep=1mm, leftmargin=6mm]
+    \item Requirement analysis and problem definition
+    \item Data collection and structuring of the place database
+    \item Implementation of core data structures (graph, hash table, trie)
+    \item Implementation of searching and route-optimization algorithms
+    \item Implementation of categorized browsing and itinerary-building modules
+    \item Integration of the C++ engine with the map interface and database
+    \item Testing for correctness, efficiency and usability
+    \item Evaluation of the performance of selected data structures and algorithms
+    \item Documentation and project presentation
+\end{itemize}
+}
+
+\vspace{8mm}
+
+\needspace{17.5cm}
+
+\newpage
+
+% -------------------------------------------------
+% PAGE 3
+% -------------------------------------------------
+
+\blueheading{System Architecture (High Level Diagram)}
+
+\vspace{10mm}
+
+
+
+
+\answerbox[15.0cm]{%
+\centering
+\includegraphics[width=\dimexpr\textwidth-3\fboxsep-3\fboxrule\relax,height=12.5cm,keepaspectratio]{HMDpbl.jpeg}
+}
+
+
+
+
+\vspace{150mm}
+
+\blueheading{Project Outcome / Deliverables }
+
+\vspace{1mm}
+
+
+
+\answerbox[15cm]{ One of the main goals of this project is the development of an Interactive City Guide, which will use fundamental data structures and algorithms to organize, search, retrieve, and manage city location data efficiently, while enabling users to explore destinations and generate personalized travel itineraries. The developed program will have the following features:
+
+\vspace{1.5mm}
+\begin{itemize}[itemsep=1mm, topsep=1.5mm, leftmargin=6mm]
+    \item Modeling the city as a graph, where locations such as attractions, hotels, restaurants, shopping areas, and other points of interest are represented as nodes, and the routes or connections between them are represented as weighted edges.
+    \item Implementing BFS and DFS traversal techniques to enable exploration of routes and analysis of how different city locations are connected to one another.
+    \item Applying shortest-path algorithms such as Dijkstra’s or A* to determine the most optimal route between two or more selected destinations.
+    \item Storing and managing place-related data using suitable data structures, including arrays, linked lists, trees, or hash tables, selected based on the access and update requirements of the system.
+    \itemPerforming Performing efficient searching and sorting operations to help users discover and organize locations according to category, distance, or rating.
+    \item Utilizing a priority queue to rank and recommend places based on factors such as user preferences, popularity, or proximity to the user’s location.
+    \item Designing an itinerary generation module that applies route optimization techniques to construct efficient, personalized travel plans for users.
+    \item Ensuring efficient insertion, deletion, searching, and retrieval of location records within the underlying data structures used by the system.
+    \item Conducting testing and performance analysis to evaluate time complexity, memory usage, and the overall speed of route computation.
+    \item Providing a simple and user-friendly C++ interface for interacting with the system, supported by complete documentation and a final working demonstration.
+\end{itemize}
+
+\vspace{1.5mm}
+}
+
+\vspace{8mm}
+
+\blueheading{Assumptions}
+
+\vspace{3mm}
+
+
+
+\answerbox[8.35cm]{%
+
+1. The city map used for the project is a simplified, self-contained graph (hand-built/generated from a small OpenStreetMap extract rather than a constantly updating global map)-the goal is to demonstrate correct algorithmic behaviour, not to compete with a production mapping service.
+ \vspace{2mm}
+
+2. Real-time factors that commercial map services account for, such as live traffic, road closures, or public transport schedules, are out of scope; all edge weights (distances/times) are treated as static for the duration of a session.
+ \vspace{2mm}
+
+3.The user base for testing is assumed to be small (single-machine, a handful of concurrent users at most), so the database layer is built for correctness and clarity rather than for handling heavy concurrent load.
+ \vspace{2mm}
+
+4. Place data (names, categories, coordinates, ratings) is either entered manually or drawn from a small pre-collected dataset rather than pulled live from a third-party API, since the focus of the project is the algorithmic and data-structure layer, not data acquisition.
+\vspace{2mm}
+
+5. The web front end is treated as a supporting layer for demonstration purposes; it is not expected to match the polish of a commercial product, since the marks/value of the project sit primarily in the C++ and DSA components.
+}
+
+
+
+\vspace{3mm}
+
+\blueheading{References}
+
+\vspace{5mm}
+
+
+\answerbox[6.5cm]{1.	GeeksforGeeks – used as a reference for understanding graphs, BFS/DFS traversal methods, Dijkstra’s algorithm, priority queues, and hash table concepts (geeksforgeeks.org).
+\vspace{2mm}
+
+	2.	cplusplus.com / W3Schools – referred to for C++ syntax, STL containers, and the fundamentals of object-oriented programming.
+    \vspace{2mm}
+    
+	3.	OpenStreetMap (OSM) – consulted for real-world city map data, location coordinates, and the general structure of routes (openstreetmap.org)
+    \vspace{2mm}
+
+
+	4.	Introduction to Algorithms (CLRS) by Cormen, Leiserson, Rivest, and Stein – used as a theoretical basis for graph algorithms, shortest-path computation, and complexity analysis.
+    \vspace{2mm}
+    
+	5. Google Maps Platform Documentation – referred to for insight into interactive map functionality, place categorization, and how routes and itineraries are typically designed (developers.google.com/maps).}
+
+\end{document}12
