@@ -1,10 +1,3 @@
-// Module 1: Graph Construction (Ishita Bijalwan)
-// Adjacency-list graph of places connected by roads.
-// Edge weight = distance in km (Haversine) so Module 2 can run Dijkstra / A*.
-//
-// Compile: g++ -std=c++17 -O2 graph_construction.cpp -o graph
-// Run:     ./graph
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -17,12 +10,12 @@
 
 using namespace std;
 
-// ---------- Data types ----------
+// Data types
 
 struct Place {
     int id;
     string name;
-    string category;   // e.g. "monument", "food", "park"
+    string category;   
     double lat;
     double lon;
 };
@@ -33,7 +26,7 @@ struct Edge {
     double timeMin;    // estimated travel time in minutes
 };
 
-// ---------- Graph ----------
+//Graph
 
 class Graph {
 private:
@@ -83,7 +76,7 @@ public:
         addRoad(getId(a), getId(b), distanceKm);
     }
 
-    // ---------- Accessors (used by Dijkstra / A* in Module 2) ----------
+    //Accessors (used by Dijkstra / A* in Module 2)
     int size() const { return (int)places.size(); }
     const Place& getPlace(int id) const { checkId(id); return places[id]; }
     const vector<Edge>& neighbors(int id) const { checkId(id); return adj[id]; }
@@ -96,7 +89,7 @@ public:
 
     bool hasPlace(const string& name) const { return nameToId.count(name) > 0; }
 
-    // ---------- Loading from CSV files ----------
+    //Loading from CSV files
     // places.csv: name,category,lat,lon
     // roads.csv : placeA,placeB[,distanceKm]
     void loadPlaces(const string& file) {
@@ -132,7 +125,7 @@ public:
         }
     }
 
-    // ---------- Display ----------
+    //Display
     void print() const {
         cout << fixed << setprecision(2);
         for (const Place& p : places) {
@@ -156,7 +149,7 @@ private:
     }
 };
 
-// ---------- Demo ----------
+//Demo
 
 int main() {
     Graph g;
