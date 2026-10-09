@@ -1,7 +1,6 @@
 PRAGMA foreign_keys = ON;
 
 -- USERS
-
 INSERT INTO users (id, name, username, email, password_hash) VALUES
 (1, 'Nandini Rana', 'nandini', 'nandini@sangam.com', 'hash_nandini'),
 (2, 'Srishti Dhasmana', 'srishti', 'srishti@sangam.com', 'hash_srishti'),
@@ -19,9 +18,7 @@ INSERT INTO users (id, name, username, email, password_hash) VALUES
 (14, 'Abhyudit Sharma', 'abhyudit', 'abhyudit@sangam.com', 'hash_abhyudit'),
 (15, 'Atharva Madan', 'atharva', 'atharva@sangam.com', 'hash_atharva');
 
-
--- PROFILES
-
+-- PROFILES 
 INSERT INTO profiles (id, user_id, bio, profile_picture) VALUES
 (1, 1, 'Vlogging through life', 'https://example.com/profiles/nandini.jpg'),
 (2, 2, 'Travel, food and hidden places.', 'https://example.com/profiles/srishti.jpg'),
@@ -39,260 +36,356 @@ INSERT INTO profiles (id, user_id, bio, profile_picture) VALUES
 (14, 14, 'Travel, food and hidden places.', 'https://example.com/profiles/abhyudit.jpg'),
 (15, 15, 'Full time traveller', 'https://example.com/profiles/atharva.jpg');
 
-
--- FOLLOWERS
-
+-- FOLLOWERS 
 INSERT INTO followers (id, follower_id, following_id) VALUES
-(1, 1, 2),
-(2, 1, 3),
-(3, 2, 1),
-(4, 2, 3),
-(5, 3, 1),
-(6, 3, 2),
-(7, 4, 5),
-(8, 5, 4),
-(9, 6, 7),
-(10, 7, 6),
-(11, 8, 9),
-(12, 9, 8),
-(13, 10, 11),
-(14, 11, 10),
-(15, 12, 13),
-(16, 13, 12),
-(17, 14, 15),
-(18, 15, 14);
+(1, 1, 2), (2, 1, 3), (3, 2, 1), (4, 2, 3), (5, 3, 1), (6, 3, 2),
+(7, 4, 5), (8, 5, 4), (9, 6, 7), (10, 7, 6), (11, 8, 9), (12, 9, 8),
+(13, 10, 11), (14, 11, 10), (15, 12, 13), (16, 13, 12), (17, 14, 15), (18, 15, 14);
 
 
--- PLACES
--- category IDs:
--- 1 Restaurant
--- 2 Cafe
--- 3 Park
--- 4 Museum
--- 5 Shopping Mall
--- 6 Hotel
--- 7 Theater
--- 8 Gym
--- 9 Library
+-- PLACES 
+INSERT INTO places (id, user_id, category_id, name, description, latitude, longitude) VALUES
+-- DEHRADUN
+(1, 1, 3, 'Robber''s Cave (Gucchu Pani)', 'Natural limestone cave with a flowing stream, perfect for a short adventure.', 30.3715, 78.0770),
+(2, 2, 3, 'Sahastradhara', 'Thousand-fold sulphur springs and waterfalls with medicinal properties.', 30.3870, 78.1340),
+(3, 3, 4, 'Forest Research Institute (FRI)', 'Iconic colonial-era campus with museums and botanical gardens.', 30.3426, 77.9996),
+(4, 4, 3, 'Mindrolling Monastery', 'One of Asia''s largest Buddhist monasteries with a towering stupa.', 30.2670, 78.0060),
+(5, 5, 3, 'Tapkeshwar Mahadev Temple', 'Ancient cave temple dedicated to Lord Shiva with a natural water drip.', 30.3410, 78.0120),
+(6, 6, 5, 'Pacific Mall', 'Popular shopping and entertainment destination in Dehradun.', 30.3540, 78.0810),
+(7, 7, 3, 'Lachhiwala Nature Park', 'Green picnic spot with natural water pools and dense forest.', 30.2297, 78.1050),
+(8, 8, 2, 'Café de Piccolo', 'Cozy cafe known for coffee, snacks and relaxed conversations.', 30.3256, 78.0437),
+(9, 9, 1, 'Kabila Restaurant', 'Casual restaurant serving a variety of North Indian dishes.', 30.3165, 78.0322),
+(10, 10, 6, 'Hotel Madhuban', 'Comfortable centrally located hotel in Dehradun.', 30.3340, 78.0550),
 
+-- MUSSOORIE
+(11, 11, 3, 'Gun Hill', 'Second highest peak of Mussoorie with panoramic Himalayan views and cable car.', 30.4598, 78.0644),
+(12, 12, 3, 'Lal Tibba', 'Highest viewpoint in Mussoorie offering telescope views of snow peaks.', 30.4680, 78.0750),
+(13, 13, 3, 'Kempty Falls', 'Popular waterfall cascade on the Mussoorie-Dehradun road.', 30.4880, 78.0120),
+(14, 14, 3, 'Camel''s Back Road', 'Scenic 3 km walking road shaped like a camel''s hump.', 30.4550, 78.0700),
+(15, 15, 5, 'Mussoorie Mall Road', 'Bustling promenade with shops, cafes and valley views.', 30.4590, 78.0660),
+(16, 1, 3, 'Company Garden', 'Well-maintained garden with flowers, boating and children''s park.', 30.4500, 78.0800),
+(17, 2, 2, 'Cafe Ivy', 'Charming cafe in Landour popular among writers and travellers.', 30.4620, 78.0780),
+(18, 3, 6, 'The Claridges Nabha', 'Heritage hotel with colonial charm and mountain views.', 30.4570, 78.0680),
+(19, 4, 3, 'George Everest House', 'Historic home of Sir George Everest with stunning valley views.', 30.4450, 78.0550),
+(20, 5, 9, 'Mussoorie Library', 'Old colonial library offering quiet reading spaces.', 30.4580, 78.0650),
 
-INSERT INTO places
-(id, user_id, category_id, name, description, latitude, longitude)
-VALUES
-(1, 1, 3, 'Robber''s Cave', 
- 'A famous natural cave and waterfall destination near Dehradun.',
- 30.3715, 78.0770),
+-- RISHIKESH
+(21, 6, 2, 'The Beatles Cafe', 'Iconic cafe near the Ganga associated with The Beatles'' stay.', 30.1180, 78.3140),
+(22, 7, 3, 'Laxman Jhula', 'Famous iron suspension bridge across the Ganga.', 30.1260, 78.3300),
+(23, 8, 3, 'Ram Jhula', 'Another iconic suspension bridge connecting the two banks.', 30.1220, 78.3150),
+(24, 9, 3, 'Triveni Ghat', 'Sacred ghat famous for evening Ganga Aarti.', 30.1030, 78.2940),
+(25, 10, 6, 'Parmarth Niketan', 'Large ashram offering yoga, meditation and riverside stay.', 30.1100, 78.3050),
+(26, 11, 1, 'Chotiwala Restaurant Rishikesh', 'Popular pure-veg restaurant near the bridges.', 30.1200, 78.3200),
+(27, 12, 3, 'Neer Waterfall', 'Scenic waterfall reachable by a short trek.', 30.1400, 78.3500),
+(28, 13, 8, 'Adventure Point Shivpuri', 'Base for river rafting and bungee jumping.', 30.0800, 78.3800),
+(29, 14, 2, 'Little Buddha Cafe', 'Relaxed riverside cafe with great views.', 30.1150, 78.3100),
+(30, 15, 6, 'Hotel Mandakini', 'Comfortable hotel close to the Ganga.', 30.1050, 78.2950),
 
-(2, 2, 3, 'Malsi Deer Park',
- 'A peaceful nature park located near the foothills of Mussoorie.',
- 30.3724, 78.0752),
+-- HALDWANI
+(31, 1, 5, 'Haldwani Mall Road', 'Main shopping stretch of the city.', 29.2180, 79.5130),
+(32, 2, 3, 'Gaula River Side', 'Peaceful river bank area popular for evening walks.', 29.2250, 79.5200),
+(33, 3, 1, 'Kumaoni Rasoi', 'Authentic Kumaoni cuisine restaurant.', 29.2200, 79.5150),
+(34, 4, 6, 'Hotel Mandakini Haldwani', 'Well-located hotel for travellers heading to Nainital.', 29.2150, 79.5100),
+(35, 5, 2, 'Cafe Hill View', 'Casual cafe popular with students and locals.', 29.2220, 79.5180),
+(36, 6, 9, 'Haldwani Public Library', 'Quiet space for reading and studying.', 29.2170, 79.5120),
+(37, 7, 3, 'Kathgodam Riverside', 'Scenic spot near the railway station.', 29.2650, 79.5450),
+(38, 8, 5, 'City Centre Market', 'Local market for everyday shopping and street food.', 29.2190, 79.5140),
+(39, 9, 4, 'Regional Science Centre', 'Interactive science exhibits for families.', 29.2300, 79.5250),
+(40, 10, 1, 'Pahadi Kitchen', 'Restaurant specialising in mountain cuisine.', 29.2210, 79.5160),
 
-(3, 3, 2, 'Café de Piccolo',
- 'A cozy cafe for coffee, snacks and relaxed conversations.',
- 30.3256, 78.0437),
+-- HARIDWAR
+(41, 11, 3, 'Har Ki Pauri', 'Most sacred ghat of Haridwar, famous for Ganga Aarti.', 29.9457, 78.1642),
+(42, 12, 1, 'Chotiwala Restaurant', 'Legendary pure-veg restaurant near Har Ki Pauri.', 29.9460, 78.1650),
+(43, 13, 3, 'Mansa Devi Temple', 'Hilltop temple reachable by ropeway with panoramic views.', 29.9580, 78.1750),
+(44, 14, 3, 'Chandi Devi Temple', 'Another important Shakti temple on Neel Parvat.', 29.9400, 78.1800),
+(45, 15, 5, 'Haridwar Market (Upper Road)', 'Busy market for religious items, clothes and sweets.', 29.9470, 78.1660),
+(46, 1, 6, 'Hotel Ganga Lahari', 'Riverside hotel close to the main ghats.', 29.9440, 78.1630),
+(47, 2, 3, 'Daksh Prajapati Temple', 'Ancient temple complex in Kankhal.', 29.9300, 78.1500),
+(48, 3, 2, 'Cafe Ganga View', 'Cafe overlooking the river near the aarti ghat.', 29.9465, 78.1645),
+(49, 4, 9, 'Haridwar Public Library', 'Quiet reading space in the city.', 29.9500, 78.1700),
+(50, 5, 1, 'Hoshiyarpuriwala', 'Famous for pure-veg thalis and sweets.', 29.9450, 78.1620),
 
-(4, 4, 4, 'Forest Research Institute',
- 'A historic research institution known for its colonial architecture and museum.',
- 30.3426, 77.9996),
+-- ROORKEE
+(51, 6, 4, 'IIT Roorkee Campus', 'Historic engineering institute with beautiful colonial buildings.', 29.8640, 77.8960),
+(52, 7, 3, 'Solani Aqueduct', 'Engineering marvel and scenic walkway over the Solani river.', 29.8550, 77.8900),
+(53, 8, 5, 'Roorkee Market', 'Main local market for daily needs and street food.', 29.8540, 77.8880),
+(54, 9, 1, 'Punjabi Dhaba Roorkee', 'Popular roadside eatery for travellers.', 29.8500, 77.8850),
+(55, 10, 6, 'Hotel Polaris', 'Comfortable hotel near the railway station.', 29.8570, 77.8920),
+(56, 11, 2, 'Cafe Campus', 'Student-favourite cafe near IIT.', 29.8620, 77.8950),
+(57, 12, 9, 'Roorkee Central Library', 'Quiet library space.', 29.8530, 77.8870),
+(58, 13, 3, 'Ganga Canal Side', 'Peaceful walk along the historic Ganga Canal.', 29.8480, 77.8800),
+(59, 14, 1, 'Shahi Restaurant', 'Local favourite for North Indian meals.', 29.8560, 77.8890),
+(60, 15, 8, 'Roorkee Gym & Fitness', 'Modern gym facility in the city.', 29.8510, 77.8860),
 
-(5, 5, 5, 'Pacific Mall Dehradun',
- 'A popular shopping and entertainment destination.',
- 30.3540, 78.0810),
+-- KOTDWAR
+(61, 1, 3, 'Sidhbali Temple', 'Popular temple dedicated to Lord Hanuman on a hill.', 29.7500, 78.5300),
+(62, 2, 3, 'Kanvashram', 'Ancient ashram associated with sage Kanva, peaceful riverside spot.', 29.7600, 78.5400),
+(63, 3, 5, 'Kotdwar Market', 'Main market of the town.', 29.7460, 78.5220),
+(64, 4, 1, 'Garhwali Rasoi', 'Authentic Garhwali food restaurant.', 29.7480, 78.5250),
+(65, 5, 6, 'Hotel Blue Star', 'Decent hotel for overnight stays.', 29.7450, 78.5200),
+(66, 6, 2, 'Cafe Hills', 'Small cafe popular with locals.', 29.7470, 78.5230),
+(67, 7, 3, 'Khoh River Side', 'Scenic river bank area.', 29.7550, 78.5350),
+(68, 8, 9, 'Kotdwar Library', 'Quiet public library.', 29.7440, 78.5190),
+(69, 9, 1, 'Pahadi Kitchen Kotdwar', 'Mountain cuisine restaurant.', 29.7490, 78.5240),
+(70, 10, 3, 'Durgadhar Temple', 'Hilltop temple with nice views.', 29.7520, 78.5280),
 
-(6, 1, 1, 'Kabila Restaurant',
- 'A casual restaurant serving a variety of Indian dishes.',
- 30.3165, 78.0322),
+-- BHIMTAL
+(71, 11, 3, 'Bhimtal Lake', 'Beautiful lake perfect for boating and peaceful walks.', 29.3444, 79.5630),
+(72, 12, 3, 'Sattal Lake', 'Cluster of seven interconnected freshwater lakes.', 29.3500, 79.5200),
+(73, 13, 3, 'Naukuchiatal', 'Nine-cornered lake ideal for quiet boating.', 29.3400, 79.5800),
+(74, 14, 6, 'The Lake Resort Bhimtal', 'Lakeside resort with mountain views.', 29.3450, 79.5650),
+(75, 15, 2, 'Cafe Lake View', 'Cafe overlooking Bhimtal Lake.', 29.3460, 79.5640),
+(76, 1, 1, 'Kumaoni Kitchen Bhimtal', 'Local Kumaoni food restaurant.', 29.3430, 79.5620),
+(77, 2, 3, 'Island Aquarium', 'Small island in Bhimtal Lake with aquarium.', 29.3440, 79.5635),
+(78, 3, 3, 'Hidimba Parvat', 'Hill offering panoramic views of the lake.', 29.3480, 79.5700),
+(79, 4, 5, 'Bhimtal Market', 'Small local market near the lake.', 29.3420, 79.5610),
+(80, 5, 9, 'Bhimtal Reading Room', 'Quiet space for travellers.', 29.3410, 79.5600),
 
-(7, 2, 6, 'Hotel Madhuban',
- 'A comfortable hotel located in central Dehradun.',
- 30.3340, 78.0550),
+-- NAINITAL
+(81, 6, 3, 'Naini Lake', 'The heart of Nainital – iconic lake for boating and lakeside walks.', 29.3803, 79.4636),
+(82, 7, 5, 'Mall Road Nainital', 'Bustling promenade with shops, cafes and lake views.', 29.3919, 79.4542),
+(83, 8, 3, 'Snow View Point', 'Viewpoint reachable by ropeway with Himalayan vistas.', 29.4000, 79.4500),
+(84, 9, 3, 'Naina Devi Temple', 'Sacred temple on the northern shore of Naini Lake.', 29.3920, 79.4550),
+(85, 10, 3, 'Tiffin Top (Dorothy''s Seat)', 'Popular viewpoint and picnic spot.', 29.3850, 79.4400),
+(86, 11, 6, 'The Naini Retreat', 'Heritage hotel with excellent lake views.', 29.3880, 79.4600),
+(87, 12, 2, 'Cafe de Tavern', 'Popular cafe on Mall Road.', 29.3900, 79.4530),
+(88, 13, 3, 'Eco Cave Gardens', 'Man-made cave complex and gardens.', 29.3950, 79.4700),
+(89, 14, 1, 'Sakley''s Restaurant', 'Classic restaurant serving continental and Indian food.', 29.3890, 79.4520),
+(90, 15, 9, 'Nainital Club Library', 'Quiet colonial-era reading space.', 29.3870, 79.4580),
 
-(8, 3, 3, 'Lachhiwala Nature Park',
- 'A popular outdoor destination surrounded by greenery and water pools.',
- 30.2297, 78.1050),
-
-(9, 4, 9, 'Dehradun Central Library',
- 'A quiet place for reading and studying.',
- 30.3165, 78.0320),
-
-(10, 5, 2, 'First Cup Coffee',
- 'A casual cafe popular for coffee and quick snacks.',
- 30.3250, 78.0430);
-
+-- PAURI
+(91, 1, 3, 'Kandoliya Temple', 'Hilltop temple with panoramic views of the Himalayas.', 30.1600, 78.7800),
+(92, 2, 3, 'Laxman Jhula View Point Pauri', 'Scenic viewpoint overlooking the valleys.', 30.1550, 78.7750),
+(93, 3, 5, 'Pauri Market', 'Main local market of the town.', 30.1526, 78.7766),
+(94, 4, 1, 'Garhwali Thali House', 'Authentic Garhwali meals.', 30.1530, 78.7770),
+(95, 5, 6, 'Hotel Himalaya', 'Simple hotel with mountain views.', 30.1510, 78.7750),
+(96, 6, 2, 'Cafe Himalayan', 'Small cafe popular with travellers.', 30.1540, 78.7780),
+(97, 7, 3, 'Kyunkaleshwar Mahadev', 'Ancient Shiva temple with peaceful surroundings.', 30.1700, 78.7900),
+(98, 8, 9, 'Pauri Public Library', 'Quiet library space.', 30.1500, 78.7740),
+(99, 9, 3, 'Adwani Forest', 'Dense forest area good for short nature walks.', 30.1650, 78.7850),
+(100, 10, 1, 'Pahadi Rasoi Pauri', 'Local mountain cuisine restaurant.', 30.1520, 78.7760);
 
 -- CONNECTIONS
--- Used for Dijkstra / route finding
-
-INSERT INTO connections
-(id, from_place_id, to_place_id, distance_km, travel_time_min)
-VALUES
-(1, 1, 2, 1.8, 6),
-(2, 2, 3, 5.2, 15),
-(3, 3, 4, 6.0, 18),
-(4, 4, 5, 7.5, 22),
-(5, 5, 6, 5.1, 16),
-(6, 6, 7, 4.0, 12),
-(7, 7, 8, 8.5, 25),
-(8, 8, 9, 12.0, 30),
-(9, 9, 10, 2.5, 8),
-(10, 3, 10, 1.2, 5),
-(11, 1, 4, 7.0, 20),
-(12, 4, 8, 9.0, 27);
-
+INSERT INTO connections (id, from_place_id, to_place_id, distance_km, travel_time_min) VALUES
+(1, 1, 2, 8.5, 25), (2, 1, 3, 7.0, 20), (3, 3, 8, 4.0, 12), (4, 8, 9, 1.5, 6),
+(5, 2, 7, 18.0, 40), (6, 4, 5, 6.0, 18),
+(7, 11, 12, 3.5, 15), (8, 11, 15, 1.2, 8), (9, 13, 14, 12.0, 30), (10, 15, 17, 2.0, 10),
+(11, 21, 22, 2.5, 10), (12, 22, 23, 1.8, 8), (13, 24, 25, 2.0, 8), (14, 21, 29, 1.5, 6),
+(15, 31, 33, 1.0, 5), (16, 32, 37, 6.0, 15),
+(17, 41, 42, 0.5, 3), (18, 41, 43, 3.5, 15), (19, 43, 44, 8.0, 25),
+(20, 51, 52, 2.0, 8), (21, 51, 56, 1.5, 6),
+(22, 61, 62, 5.0, 15), (23, 63, 64, 0.8, 4),
+(24, 71, 72, 8.0, 20), (25, 71, 73, 12.0, 30), (26, 71, 75, 0.5, 3),
+(27, 81, 82, 1.0, 5), (28, 81, 84, 0.8, 4), (29, 82, 87, 0.3, 2), (30, 83, 85, 4.0, 15),
+(31, 91, 92, 3.0, 12), (32, 93, 94, 0.5, 3),
+(33, 1, 11, 35.0, 70), (34, 1, 21, 45.0, 80), (35, 21, 41, 25.0, 45),
+(36, 41, 51, 30.0, 50), (37, 31, 81, 40.0, 90), (38, 81, 71, 18.0, 40),
+(39, 71, 72, 8.0, 20), (40, 11, 21, 80.0, 150), (41, 51, 61, 70.0, 120),
+(42, 91, 1, 110.0, 180);
 
 -- PLACE IMAGES
-
-INSERT INTO place_images
-(id, place_id, user_id, image_url)
-VALUES
+INSERT INTO place_images (id, place_id, user_id, image_url) VALUES
 (1, 1, 1, 'https://example.com/places/robbers-cave-1.jpg'),
 (2, 1, 2, 'https://example.com/places/robbers-cave-2.jpg'),
-(3, 2, 3, 'https://example.com/places/malsi-deer-park-1.jpg'),
-(4, 3, 4, 'https://example.com/places/cafe-de-piccolo-1.jpg'),
-(5, 4, 5, 'https://example.com/places/fri-1.jpg'),
-(6, 5, 1, 'https://example.com/places/pacific-mall-1.jpg'),
-(7, 6, 2, 'https://example.com/places/kabila-restaurant-1.jpg'),
-(8, 7, 3, 'https://example.com/places/hotel-madhuban-1.jpg'),
-(9, 8, 4, 'https://example.com/places/lachhiwala-nature-park-1.jpg'),
-(10, 9, 5, 'https://example.com/places/dehradun-central-library-1.jpg'),
-(11, 10, 1, 'https://example.com/places/first-cup-coffee-1.jpg'),
-(12, 10, 2, 'https://example.com/places/first-cup-coffee-2.jpg');
-
+(3, 2, 3, 'https://example.com/places/sahastradhara-1.jpg'),
+(4, 3, 4, 'https://example.com/places/fri-1.jpg'),
+(5, 11, 5, 'https://example.com/places/gun-hill-1.jpg'),
+(6, 12, 6, 'https://example.com/places/lal-tibba-1.jpg'),
+(7, 13, 7, 'https://example.com/places/kempty-falls-1.jpg'),
+(8, 21, 8, 'https://example.com/places/beatles-cafe-1.jpg'),
+(9, 22, 9, 'https://example.com/places/laxman-jhula-1.jpg'),
+(10, 41, 10, 'https://example.com/places/har-ki-pauri-1.jpg'),
+(11, 71, 11, 'https://example.com/places/bhimtal-lake-1.jpg'),
+(12, 72, 12, 'https://example.com/places/sattal-1.jpg'),
+(13, 81, 13, 'https://example.com/places/naini-lake-1.jpg'),
+(14, 82, 14, 'https://example.com/places/nainital-mall-1.jpg'),
+(15, 91, 15, 'https://example.com/places/kandoliya-1.jpg'),
+(16, 51, 1, 'https://example.com/places/iit-roorkee-1.jpg'),
+(17, 61, 2, 'https://example.com/places/sidhbali-1.jpg'),
+(18, 31, 3, 'https://example.com/places/haldwani-mall-1.jpg'),
+(19, 4, 4, 'https://example.com/places/mindrolling-1.jpg'),
+(20, 15, 5, 'https://example.com/places/mussoorie-mall-1.jpg');
 
 -- PLACE VIDEOS
-
-INSERT INTO place_videos
-(id, place_id, user_id, video_url)
-VALUES
+INSERT INTO place_videos (id, place_id, user_id, video_url) VALUES
 (1, 1, 1, 'https://example.com/videos/robbers-cave.mp4'),
-(2, 4, 4, 'https://example.com/videos/fri.mp4'),
-(3, 8, 3, 'https://example.com/videos/lachhiwala.mp4'),
-(4, 5, 5, 'https://example.com/videos/pacific-mall.mp4'),
-(5, 3, 2, 'https://example.com/videos/cafe-de-piccolo.mp4'),
-(6, 6, 1, 'https://example.com/videos/kabila-restaurant.mp4');
-
+(2, 11, 2, 'https://example.com/videos/gun-hill.mp4'),
+(3, 21, 3, 'https://example.com/videos/beatles-cafe.mp4'),
+(4, 41, 4, 'https://example.com/videos/har-ki-pauri-aarti.mp4'),
+(5, 71, 5, 'https://example.com/videos/bhimtal-lake.mp4'),
+(6, 81, 6, 'https://example.com/videos/naini-lake.mp4'),
+(7, 13, 7, 'https://example.com/videos/kempty-falls.mp4'),
+(8, 22, 8, 'https://example.com/videos/laxman-jhula.mp4'),
+(9, 3, 9, 'https://example.com/videos/fri.mp4'),
+(10, 91, 10, 'https://example.com/videos/kandoliya.mp4');
 
 -- PLACE REVIEWS
-
-INSERT INTO place_reviews
-(id, place_id, user_id, rating, review)
-VALUES
-(1, 1, 1, 5, 'Beautiful place and great for a short outing.'),
-(2, 1, 2, 4, 'Nice experience, especially during the cooler months.'),
-(3, 2, 3, 4, 'Peaceful and surrounded by greenery.'),
-(4, 3, 4, 5, 'Great coffee and a really cozy atmosphere.'),
-(5, 4, 5, 5, 'The architecture is impressive and the museum is interesting.'),
-(6, 5, 1, 4, 'Good place for shopping and entertainment.'),
-(7, 8, 2, 4, 'Nice place to spend a few hours outdoors.'),
-(8, 10, 3, 4, 'Good coffee and a comfortable atmosphere.');
-
+INSERT INTO place_reviews (id, place_id, user_id, rating, review) VALUES
+(1, 1, 1, 5, 'Beautiful natural cave experience in Dehradun.'),
+(2, 1, 2, 4, 'Great short outing, especially in cooler months.'),
+(3, 11, 3, 5, 'Amazing views from Gun Hill.'),
+(4, 21, 4, 5, 'Iconic cafe with great Ganga views.'),
+(5, 41, 5, 5, 'Har Ki Pauri aarti is a must-do experience.'),
+(6, 71, 6, 5, 'Bhimtal is so much calmer than Nainital.'),
+(7, 81, 7, 5, 'Naini Lake at sunset is magical.'),
+(8, 13, 8, 4, 'Kempty Falls is fun but can get crowded.'),
+(9, 3, 9, 5, 'FRI architecture is truly impressive.'),
+(10, 91, 10, 4, 'Peaceful hilltop temple with great views.'),
+(11, 22, 11, 5, 'Walking across Laxman Jhula is special.'),
+(12, 72, 12, 5, 'Sattal is perfect for nature lovers.'),
+(13, 51, 13, 4, 'Beautiful campus to walk around.'),
+(14, 61, 14, 4, 'Sidhbali Temple has a nice peaceful vibe.'),
+(15, 82, 15, 4, 'Mall Road is lively in the evenings.');
 
 -- SAVED PLACES
-
-INSERT INTO saved_places
-(id, user_id, place_id)
-VALUES
-(1, 1, 4),
-(2, 1, 8),
-(3, 2, 1),
-(4, 2, 5),
-(5, 3, 3),
-(6, 3, 10),
-(7, 4, 1),
-(8, 5, 4),
-(9, 6, 2),
-(10, 7, 3),
-(11, 8, 5),
-(12, 9, 6),
-(13, 10, 7),
-(14, 11, 8),
-(15, 12, 9),
-(16, 13, 10),
-(17, 14, 1),
-(18, 15, 2);
-
+INSERT INTO saved_places (id, user_id, place_id) VALUES
+(1, 1, 1), (2, 1, 11), (3, 1, 81),
+(4, 2, 21), (5, 2, 41), (6, 2, 71),
+(7, 3, 3), (8, 3, 13), (9, 3, 72),
+(10, 4, 22), (11, 4, 81), (12, 4, 91),
+(13, 5, 1), (14, 5, 15), (15, 5, 51),
+(16, 6, 11), (17, 6, 71), (18, 6, 82),
+(19, 7, 21), (20, 7, 41), (21, 7, 61),
+(22, 8, 3), (23, 8, 72), (24, 8, 91),
+(25, 9, 13), (26, 9, 22), (27, 9, 81),
+(28, 10, 1), (29, 10, 41), (30, 10, 71),
+(31, 11, 11), (32, 11, 21), (33, 11, 82),
+(34, 12, 3), (35, 12, 51), (36, 12, 91),
+(37, 13, 15), (38, 13, 72), (39, 13, 81),
+(40, 14, 1), (41, 14, 22), (42, 14, 61),
+(43, 15, 11), (44, 15, 41), (45, 15, 71);
 
 -- ITINERARIES
-
-INSERT INTO itineraries
-(id, user_id, name, description)
-VALUES
-(1, 1, 'Dehradun Nature Day',
- 'A one-day itinerary covering some of Dehradun''s natural attractions.'),
-
-(2, 2, 'Dehradun Explorer',
- 'A mix of sightseeing, food and shopping.'),
-
-(3, 3, 'Relaxed Dehradun',
- 'A slower itinerary focused on cafes and peaceful places.');
-
+INSERT INTO itineraries (id, user_id, name, description) VALUES
+(1, 1, 'Dehradun Nature Day', 'Robber''s Cave, Sahastradhara and FRI.'),
+(2, 2, 'Mussoorie Highlights', 'Gun Hill, Lal Tibba, Kempty Falls and Mall Road.'),
+(3, 3, 'Rishikesh Spiritual + Cafe', 'Laxman Jhula, Triveni Ghat and Beatles Cafe.'),
+(4, 4, 'Kumaon Lakes Circuit', 'Nainital, Bhimtal and Sattal.'),
+(5, 5, 'Haridwar + Rishikesh Day', 'Har Ki Pauri aarti and riverside Rishikesh.'),
+(6, 6, 'Garhwal Exploration', 'Pauri viewpoints and Kotdwar temples.');
 
 -- ITINERARY PLACES
+INSERT INTO itinerary_places (id, itinerary_id, place_id, visit_order) VALUES
+(1, 1, 1, 1), (2, 1, 2, 2), (3, 1, 3, 3),
+(4, 2, 11, 1), (5, 2, 12, 2), (6, 2, 13, 3), (7, 2, 15, 4),
+(8, 3, 22, 1), (9, 3, 24, 2), (10, 3, 21, 3),
+(11, 4, 81, 1), (12, 4, 71, 2), (13, 4, 72, 3),
+(14, 5, 41, 1), (15, 5, 21, 2), (16, 5, 22, 3),
+(17, 6, 91, 1), (18, 6, 61, 2), (19, 6, 62, 3);
 
-INSERT INTO itinerary_places
-(id, itinerary_id, place_id, visit_order)
-VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 2),
-(3, 1, 8, 3),
+-- POSTS 
+INSERT INTO posts (id, user_id, title, content) VALUES
+(1, 1, 'Hidden Gems of Dehradun', 'Robber''s Cave, Sahastradhara and the peaceful FRI campus are my absolute favourites.'),
+(2, 2, 'Best Cafes in Dehradun', 'Café de Piccolo never disappoints. Perfect for long conversations and good coffee.'),
+(3, 3, 'A Day at Forest Research Institute', 'The colonial architecture and the museums inside FRI are pure gold.'),
+(4, 4, 'Mussoorie Weekend Guide', 'Gun Hill, Lal Tibba, Kempty Falls and a walk on Camel''s Back Road – perfect weekend.'),
+(5, 5, 'Sunrise from Lal Tibba', 'Woke up early and the view of the snow peaks from Lal Tibba was unreal.'),
+(6, 6, 'Mall Road Evenings', 'Mussoorie Mall Road at dusk is pure magic. Shopping + valley views = perfect combo.'),
+(7, 7, 'Rishikesh Cafe Hopping', 'Beatles Cafe and Little Buddha Cafe are must-tries when in Rishikesh.'),
+(8, 8, 'Laxman Jhula at Sunset', 'Crossing Laxman Jhula while the sun sets over the Ganga is something else.'),
+(9, 9, 'Ganga Aarti at Triveni Ghat', 'The evening aarti at Triveni Ghat left me speechless.'),
+(10, 10, 'Gateway to Kumaon – Haldwani', 'Haldwani is the perfect base before heading up to Nainital or Bhimtal.'),
+(11, 11, 'Kumaoni Food in Haldwani', 'Tried authentic Kumaoni Rasoi today. The flavours are pure comfort.'),
+(12, 12, 'Har Ki Pauri Experience', 'Nothing compares to the evening Ganga Aarti at Har Ki Pauri.'),
+(13, 13, 'Temple Trail in Haridwar', 'Mansa Devi and Chandi Devi in one day – spiritual and scenic.'),
+(14, 14, 'Chotiwala is Still the King', 'The pure-veg thali at Chotiwala after the aarti hits different.'),
+(15, 15, 'IIT Roorkee Campus Walk', 'The colonial buildings and quiet pathways of IIT Roorkee are beautiful.'),
+(16, 1, 'Solani Aqueduct', 'Engineering meets nature at the Solani Aqueduct. Great evening walk.'),
+(17, 2, 'Quiet Charms of Kotdwar', 'Sidhbali Temple and Kanvashram – peaceful and less crowded.'),
+(18, 3, 'Garhwali Food in Kotdwar', 'Had the best Garhwali thali near the market today.'),
+(19, 4, 'Bhimtal over Nainital?', 'If you want peace and fewer tourists, choose Bhimtal Lake any day.'),
+(20, 5, 'Sattal – The Hidden Gem', 'Seven lakes, dense forests and absolute silence. Sattal is pure magic.'),
+(21, 6, 'Boating at Naukuchiatal', 'The nine-cornered lake is perfect for a quiet boat ride.'),
+(22, 7, 'Naini Lake at Golden Hour', 'Naini Lake during sunset is the reason people fall in love with Nainital.'),
+(23, 8, 'Mall Road Nainital Vibes', 'Shopping, people-watching and lake views – Mall Road never gets old.'),
+(24, 9, 'Snow View Point', 'Took the ropeway to Snow View and the Himalayan panorama was breathtaking.'),
+(25, 10, 'Pauri – The Underrated Hill Town', 'Kandoliya Temple and Himalayan views without the crowds. Highly recommended.'),
+(26, 11, 'Peaceful Pauri Mornings', 'Woke up to misty mountains in Pauri. This place needs more love.'),
+(27, 12, 'Kyunkaleshwar Mahadev', 'Ancient Shiva temple surrounded by forests – pure serenity.'),
+(28, 13, 'Uttarakhand Road Trip Plan', 'Dehradun → Mussoorie → Rishikesh → Haridwar in 4 days. Perfect circuit.'),
+(29, 14, 'Kumaon Lakes Circuit', 'Nainital + Bhimtal + Sattal is the ultimate lake district itinerary.'),
+(30, 15, 'Garhwal vs Kumaon', 'Garhwal for spirituality and adventure, Kumaon for lakes and peace. Both win.');
 
-(4, 2, 4, 1),
-(5, 2, 6, 2),
-(6, 2, 5, 3),
-
-(7, 3, 3, 1),
-(8, 3, 10, 2),
-(9, 3, 4, 3);
-
-
--- POSTS
-
-INSERT INTO posts
-(id, user_id, title, content)
-VALUES
-(1, 1, 'Hidden Gems of Dehradun',
- 'Some of my favourite places to explore around Dehradun.'),
-
-(2, 2, 'Best Places for a Weekend',
- 'Here are a few places that are worth visiting if you have a free weekend.'),
-
-(3, 3, 'Coffee Spots in Dehradun',
- 'A small list of cafes that are perfect for coffee and conversations.'),
-
-(4, 4, 'Exploring FRI',
- 'The architecture and surroundings of FRI are absolutely worth seeing.'),
- 
- (5, 5, 'Shopping in Dehradun',
- 'A guide to some of the best shopping destinations in Dehradun.');
-
-
--- COMMENTS
-
-INSERT INTO comments
-(id, post_id, user_id, content)
-VALUES
-(1, 1, 2, 'Robber''s Cave is definitely worth visiting.'),
-(2, 1, 3, 'Adding this to my list!'),
-(3, 2, 1, 'The FRI campus is beautiful.'),
-(4, 2, 5, 'Lachhiwala is also a good option.'),
-(5, 3, 4, 'I need to try these cafes.'),
-(6, 4, 3, 'The architecture looks amazing.'),
-(7, 5, 9, 'Pacific Mall has some great stores.');
-
+-- COMMENTS 
+INSERT INTO comments (id, post_id, user_id, content) VALUES
+(1, 1, 2, 'Robber''s Cave is always a good idea!'),
+(2, 1, 3, 'Adding FRI to my list right now.'),
+(3, 1, 5, 'Sahastradhara is best after rains.'),
+(4, 2, 4, 'Café de Piccolo is my comfort place.'),
+(5, 2, 6, 'Their cold coffee is 🔥'),
+(6, 3, 1, 'FRI is pure architectural beauty.'),
+(7, 3, 7, 'The museums inside are underrated.'),
+(8, 4, 1, 'Gun Hill views are unreal.'),
+(9, 4, 8, 'Kempty Falls was crowded but still fun.'),
+(10, 5, 2, 'Sunrise from Lal Tibba is on my bucket list.'),
+(11, 5, 9, 'Worth waking up at 5 am for.'),
+(12, 6, 3, 'Mall Road evenings are the best part of Mussoorie.'),
+(13, 6, 10, 'I always end up buying too many woollens there.'),
+(14, 7, 4, 'Beatles Cafe has such a nice vibe.'),
+(15, 7, 11, 'Little Buddha Cafe is equally good.'),
+(16, 8, 5, 'Laxman Jhula at sunset is pure magic.'),
+(17, 8, 12, 'Did you try the ropeway too?'),
+(18, 9, 6, 'Triveni Ghat aarti gave me goosebumps.'),
+(19, 9, 13, 'One of the most peaceful experiences ever.'),
+(20, 10, 7, 'Haldwani is the real gateway to Kumaon.'),
+(21, 11, 8, 'Kumaoni food hits different.'),
+(22, 11, 14, 'Where exactly is Kumaoni Rasoi?'),
+(23, 12, 9, 'Har Ki Pauri aarti is life-changing.'),
+(24, 12, 15, 'I cried during the aarti last time.'),
+(25, 13, 1, 'Mansa Devi ropeway is so convenient.'),
+(26, 14, 2, 'Chotiwala thali after aarti is non-negotiable.'),
+(27, 15, 3, 'IIT Roorkee campus is beautiful.'),
+(28, 15, 4, 'The main building looks royal.'),
+(29, 16, 5, 'Solani Aqueduct is a hidden gem.'),
+(30, 17, 6, 'Sidhbali Temple has a very peaceful vibe.'),
+(31, 17, 7, 'Kanvashram is so calm.'),
+(32, 18, 8, 'Garhwali food in Kotdwar is underrated.'),
+(33, 19, 9, 'Completely agree – Bhimtal is calmer.'),
+(34, 19, 10, 'I prefer Bhimtal over Nainital any day.'),
+(35, 20, 11, 'Sattal is pure magic.'),
+(36, 20, 12, 'Seven lakes and zero crowds – perfect.'),
+(37, 21, 13, 'Naukuchiatal is so peaceful.'),
+(38, 22, 14, 'Naini Lake sunset never gets old.'),
+(39, 22, 1, 'This photo made me book tickets.'),
+(40, 23, 2, 'Mall Road is always lively.'),
+(41, 24, 3, 'Snow View is worth the ropeway ride.'),
+(42, 25, 4, 'Pauri is so underrated.'),
+(43, 25, 5, 'Adding Kandoliya Temple to my list.'),
+(44, 26, 6, 'Misty mornings in Pauri sound dreamy.'),
+(45, 27, 7, 'Kyunkaleshwar looks so serene.'),
+(46, 28, 8, 'This road trip plan is solid.'),
+(47, 29, 9, 'Kumaon lakes circuit is my favourite.'),
+(48, 30, 10, 'Both Garhwal and Kumaon have their own magic.');
 
 -- LIKES
-
-INSERT INTO likes
-(id, post_id, user_id)
-VALUES
-(1, 1, 2),
-(2, 1, 3),
-(3, 1, 4),
-(4, 2, 1),
-(5, 2, 11),
-(6, 3, 4),
-(7, 3, 5),
-(8, 4, 1),
-(9, 4, 3),
-(11, 5, 9),
-(12, 5, 10);
+INSERT INTO likes (id, post_id, user_id) VALUES
+(1, 1, 2), (2, 1, 3), (3, 1, 4), (4, 1, 5),
+(5, 2, 1), (6, 2, 6), (7, 2, 7),
+(8, 3, 2), (9, 3, 8),
+(10, 4, 1), (11, 4, 3), (12, 4, 9),
+(13, 5, 4), (14, 5, 10),
+(15, 6, 2), (16, 6, 5), (17, 6, 11),
+(18, 7, 3), (19, 7, 6), (20, 7, 12),
+(21, 8, 4), (22, 8, 7), (23, 8, 13),
+(24, 9, 5), (25, 9, 8), (26, 9, 14),
+(27, 10, 6), (28, 10, 9),
+(29, 11, 7), (30, 11, 10),
+(31, 12, 8), (32, 12, 11), (33, 12, 15),
+(34, 13, 9), (35, 13, 12),
+(36, 14, 10), (37, 14, 13),
+(38, 15, 1), (39, 15, 11), (40, 15, 14),
+(41, 16, 2), (42, 16, 12),
+(43, 17, 3), (44, 17, 13),
+(45, 18, 4), (46, 18, 14),
+(47, 19, 5), (48, 19, 15),
+(49, 20, 6), (50, 20, 1),
+(51, 21, 7), (52, 21, 2),
+(53, 22, 8), (54, 22, 3), (55, 22, 9),
+(56, 23, 10), (57, 23, 4),
+(58, 24, 11), (59, 24, 5),
+(60, 25, 12), (61, 25, 6),
+(62, 26, 13), (63, 26, 7),
+(64, 27, 14), (65, 27, 8),
+(66, 28, 15), (67, 28, 9),
+(68, 29, 1), (69, 29, 10),
+(70, 30, 2), (71, 30, 11);
