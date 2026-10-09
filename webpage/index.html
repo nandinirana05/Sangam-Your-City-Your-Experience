@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sangam – Explore & Plan</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b1020; --glass: rgba(18, 24, 44, .72); --glass-b: rgba(255,255,255,.10);
+    --text: #eef2ff; --muted: #94a3c4; --accent: #7c5cff; --accent2: #22d3ee;
+    --hover: rgba(124,92,255,.18); --shadow: 0 10px 40px rgba(0,0,0,.45);
+  }
+  [data-theme="light"] {
+    --bg: #eef2ff; --glass: rgba(255,255,255,.80); --glass-b: rgba(15,23,42,.08);
+    --text: #0f172a; --muted: #64748b; --hover: rgba(124,92,255,.12);
+    --shadow: 0 10px 40px rgba(30,41,90,.18);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { font-family: 'Poppins', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+  #map { position: absolute; inset: 0; z-index: 0; }
+
+  /* Dark map: invert the OpenStreetMap tiles */
+  [data-theme="dark"] .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.6);
+  }
+
+  .glass { background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-b); box-shadow: var(--shadow); border-radius: 18px; }
+
+  /* Top bar */
+  #top { position: absolute; z-index: 1000; top: 14px; left: 14px; right: 14px; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; }
+  #top > * { pointer-events: auto; }
+  .bar { width: min(560px, 100%); display: flex; align-items: center; gap: 10px; padding: 8px 10px 8px 16px; }
+  .logo { font-weight: 700; font-size: 17px; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; color: transparent; white-space: nowrap; }
+  #searchWrap { position: relative; flex: 1; }
+  #search { width: 100%; background: transparent; border: none; outline: none; color: var(--text);
+    font: 500 15px 'Poppins', sans-serif; padding: 10px 6px; }
+  #search::placeholder { color: var(--muted); }
+  .icon-btn { border: none; cursor: pointer; width: 38px; height: 38px; border-radius: 12px; background: var(--hover);
+    color: var(--text); font-size: 17px; transition: transform .2s, background .2s; position: relative; }
+  .icon-btn:hover { transform: translateY(-2px) scale(1.06); background: var(--accent); color: #fff; }
+  .badge { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; border-radius: 9px; padding: 0 4px;
+    background: var(--accent2); color: #04222a; font-size: 11px; font-weight: 700; display: none; align-items: center; justify-content: center; }
+
+  #suggestions { position: absolute; top: calc(100% + 14px); left: -40px; right: -90px; list-style: none; margin: 0; padding: 6px;
+    background: var(--glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-b); border-radius: 16px; box-shadow: var(--shadow); display: none; }
+  #suggestions li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 11px; cursor: pointer; font-size: 14px; }
+  #suggestions li.active, #suggestions li:hover { background: var(--hover); }
+  #suggestions li b { color: var(--accent2); }
+  #suggestions .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); flex: none; }
+  #suggestions .cat { margin-left: auto; font-size: 11px; color: var(--muted); }
+  #suggestions .empty { color: var(--muted); cursor: default; justify-content: center; }
+
+  /* Chips */
+  #chips { display: flex; gap: 8px; overflow-x: auto; max-width: 100%; padding: 2px 4px 6px; scrollbar-width: none; }
+  #chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--glass-b); background: var(--glass);
+    backdrop-filter: blur(12px); color: var(--text); font: 500 13px 'Poppins', sans-serif; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 7px; }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--accent)); display: inline-block; }
+  .chip:hover { transform: translateY(-2px); }
+  .chip.on { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border-color: transparent; }
+  .chip.on i { background: #fff; }
+
+  /* Pins */
+  .pin { width: 28px; height: 28px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--c);
+    border: 2.5px solid #fff; box-shadow: 0 6px 14px rgba(0,0,0,.4); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
+  .pin span { width: 9px; height: 9px; background: #fff; border-radius: 50%; }
+  .leaflet-marker-icon:hover .pin { transform: rotate(-45deg) scale(1.2); }
+  .pin.sel { animation: bounce .6s ease 2; }
+  .pin.sel::after { content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 2px solid var(--c); animation: pulse 1.4s infinite; }
+  .pin.intrip { box-shadow: 0 0 0 4px rgba(34,211,238,.55), 0 6px 14px rgba(0,0,0,.4); }
+  @keyframes bounce { 0%,100% { transform: rotate(-45deg) translate(0,0); } 50% { transform: rotate(-45deg) translate(6px,-6px); } }
+  @keyframes pulse { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+
+  /* Detail card */
+  #card { position: absolute; z-index: 1000; left: 14px; bottom: 14px; width: min(340px, calc(100% - 28px)); padding: 18px;
+    transform: translateY(140%); opacity: 0; transition: transform .45s cubic-bezier(.2,.9,.3,1.2), opacity .3s; }
+  #card.show { transform: none; opacity: 1; }
+  #card .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 22%, transparent); color: var(--c); }
+  #card h2 { margin: 10px 0 4px; font-size: 20px; }
+  #card p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+  #card .row { display: flex; gap: 8px; }
+  .btn { flex: 1; padding: 10px 12px; border: none; border-radius: 12px; cursor: pointer; font: 600 13px 'Poppins', sans-serif; transition: transform .2s, filter .2s; }
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .btn.ghost { background: var(--hover); color: var(--text); }
+  .btn.added { background: #16a34a; color: #fff; }
+  #closeCard { position: absolute; top: 10px; right: 12px; background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; }
+
+  /* Trip panel */
+  #trip { position: absolute; z-index: 1000; top: 150px; right: 14px; width: 290px; max-height: calc(100% - 180px); padding: 16px; display: flex; flex-direction: column;
+    transform: translateX(120%); transition: transform .45s cubic-bezier(.2,.9,.3,1.1); }
+  #trip.show { transform: none; }
+  #trip h3 { margin: 0 0 4px; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+  #trip small { color: var(--muted); font-size: 12px; }
+  #stops { list-style: none; margin: 12px 0; padding: 0; overflow-y: auto; flex: 1; }
+  #stops li { display: flex; align-items: center; gap: 10px; padding: 9px 10px; margin-bottom: 6px; border-radius: 12px; background: var(--hover);
+    font-size: 13px; animation: slideIn .3s ease; cursor: pointer; }
+  #stops .n { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex: none; }
+  #stops .x { margin-left: auto; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; }
+  #stops .x:hover { color: #fb7185; }
+  #stops .empty { background: none; color: var(--muted); justify-content: center; text-align: center; cursor: default; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: none; } }
+
+  #toast { position: absolute; z-index: 2000; top: 20px; left: 50%; transform: translate(-50%, -80px); padding: 10px 18px; font-size: 13px; font-weight: 500;
+    transition: transform .4s cubic-bezier(.2,.9,.3,1.3); }
+  #toast.show { transform: translate(-50%, 140px); }
+  #status { position: absolute; z-index: 1000; right: 14px; bottom: 14px; padding: 6px 12px; font-size: 12px; color: var(--muted); border-radius: 999px; }
+  .leaflet-control-zoom, .leaflet-control-attribution { display: none; }
+
+  @media (max-width: 640px) {
+    #trip { top: auto; bottom: 14px; right: 14px; left: 14px; width: auto; max-height: 45%; transform: translateY(130%); }
+    #card.show ~ #trip.show { display: none; }
+    #status { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="top">
+  <div class="bar glass">
+    <span class="logo">✦ Sangam</span>
+    <div id="searchWrap">
+      <input id="search" type="text" placeholder="Search places… try “Naini”" autocomplete="off" />
+      <ul id="suggestions"></ul>
+    </div>
+    <button class="icon-btn" id="tripBtn" title="My trip">🧭<span class="badge" id="badge">0</span></button>
+    <button class="icon-btn" id="themeBtn" title="Toggle theme">🌙</button>
+  </div>
+  <div id="chips"></div>
+</div>
+
+<div id="card" class="glass">
+  <button id="closeCard">×</button>
+  <span class="tag" id="cTag"></span>
+  <h2 id="cName"></h2>
+  <p id="cInfo"></p>
+  <div class="row">
+    <button class="btn primary" id="cAdd">＋ Add to trip</button>
+    <button class="btn ghost" id="cZoom">Zoom in</button>
+  </div>
+</div>
+
+<div id="trip" class="glass">
+  <h3>My Trip <button class="icon-btn" id="clearTrip" title="Clear" style="width:30px;height:30px;font-size:14px">🗑</button></h3>
+  <small id="tripInfo">Add places to build your route</small>
+  <ul id="stops"></ul>
+  <button class="btn primary" id="fitTrip">Show whole route</button>
+</div>
+
+<div id="toast" class="glass"></div>
+<div id="status" class="glass">Connecting…</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const API = "http://localhost:8080";
+const COLORS = { Nature:"#34d399", Religious:"#f59e0b", Heritage:"#a78bfa", Landmark:"#38bdf8",
+                 Market:"#fb7185", Shopping:"#f472b6", Education:"#60a5fa", Adventure:"#f97316", Food:"#ef4444", Hotel:"#8b5cf6" };
+const colorOf = c => COLORS[c] || "#7c5cff";
+
+const FALLBACK = []; // Empty since we want to force API connection
+
+let places = [], serverUp = false, activeCat = "All", selected = null, trip = [];
+const markers = new Map();
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- Map ---------- */
+const map = L.map("map", { zoomControl:false }).setView([29.5, 78.8], 8);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+const pinLayer = L.layerGroup().addTo(map);
+let routeLine = L.polyline([], { color:"#22d3ee", weight:4, opacity:.9, dashArray:"10 10" }).addTo(map);
+
+/* ---------- Data ---------- */
+async function load() {
+  try {
+    const r = await fetch(`${API}/places`);
+    places = await r.json();
+    serverUp = true;
+    $("status").textContent = `● Live · ${places.length} places (C++ server)`;
+  } catch (e) {
+    console.error(e);
+    $("status").textContent = `● Error: Could not connect to C++ server`;
+  }
+  buildChips(); drawPins();
+}
+
+function buildChips() {
+  const cats = ["All", ...new Set(places.map(p => p.category))];
+  $("chips").innerHTML = "";
+  cats.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip" + (c === activeCat ? " on" : "");
+    b.style.setProperty("--c", colorOf(c));
+    b.innerHTML = (c === "All" ? "" : "<i></i>") + c;
+    b.onclick = () => { activeCat = c; buildChips(); drawPins(); };
+    $("chips").appendChild(b);
+  });
+}
+
+function drawPins() {
+  pinLayer.clearLayers(); markers.clear();
+  places.filter(p => activeCat === "All" || p.category === activeCat).forEach(p => {
+    const inTrip = trip.some(t => t.name === p.name);
+    const icon = L.divIcon({
+      className: "", iconSize: [28, 28], iconAnchor: [14, 28],
+      html: `<div class="pin ${selected?.name === p.name ? "sel" : ""} ${inTrip ? "intrip" : ""}" style="--c:${colorOf(p.category)}"><span></span></div>`
+    });
+    const m = L.marker([p.lat, p.lng], { icon }).addTo(pinLayer);
+    m.on("click", () => showCard(p));
+    markers.set(p.name, m);
+  });
+}
+
+/* ---------- Detail card ---------- */
+function showCard(p, fly = true) {
+  selected = p;
+  const c = colorOf(p.category);
+  $("card").style.setProperty("--c", c);
+  $("cTag").style.setProperty("--c", c);
+  $("cTag").textContent = p.category;
+  $("cName").textContent = p.name;
+  $("cInfo").textContent = `📍 ${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`;
+  updateAddBtn();
+  $("card").classList.add("show");
+  if (fly) map.flyTo([p.lat, p.lng], 15, { duration: 1.2 });
+  drawPins();
+}
+function updateAddBtn() {
+  const added = selected && trip.some(t => t.name === selected.name);
+  $("cAdd").textContent = added ? "✓ In your trip" : "＋ Add to trip";
+  $("cAdd").className = "btn " + (added ? "added" : "primary");
+}
+$("closeCard").onclick = () => { $("card").classList.remove("show"); selected = null; drawPins(); };
+$("cZoom").onclick = () => selected && map.flyTo([selected.lat, selected.lng], 17, { duration: 1 });
+$("cAdd").onclick = () => {
+  if (!selected) return;
+  const i = trip.findIndex(t => t.name === selected.name);
+  if (i >= 0) { trip.splice(i, 1); toast(`Removed ${selected.name}`); }
+  else { trip.push(selected); toast(`Added ${selected.name} ✨`); }
+  renderTrip(); updateAddBtn(); drawPins();
+};
+
+/* ---------- Trip planner ---------- */
+function km(a, b) {
+  const R = 6371, toR = x => x * Math.PI / 180;
+  const dLat = toR(b.lat - a.lat), dLng = toR(b.lng - a.lng);
+  const h = Math.sin(dLat/2)**2 + Math.cos(toR(a.lat)) * Math.cos(toR(b.lat)) * Math.sin(dLng/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+function renderTrip() {
+  const ul = $("stops"); ul.innerHTML = "";
+  if (!trip.length) ul.innerHTML = `<li class="empty">No stops yet.<br>Tap a pin and press “Add to trip”.</li>`;
+  trip.forEach((p, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="n">${i + 1}</span><span>${esc(p.name)}</span><button class="x">✕</button>`;
+    li.onclick = () => showCard(p);
+    li.querySelector(".x").onclick = e => { e.stopPropagation(); trip.splice(i, 1); renderTrip(); updateAddBtn(); drawPins(); };
+    ul.appendChild(li);
+  });
+  let total = 0; for (let i = 1; i < trip.length; i++) total += km(trip[i-1], trip[i]);
+  $("tripInfo").textContent = trip.length > 1 ? `${trip.length} stops · ~${total.toFixed(1)} km (straight line)` : "Add places to build your route";
+  routeLine.setLatLngs(trip.map(p => [p.lat, p.lng]));
+  $("badge").textContent = trip.length; $("badge").style.display = trip.length ? "flex" : "none";
+}
+$("tripBtn").onclick = () => $("trip").classList.toggle("show");
+$("clearTrip").onclick = () => { trip = []; renderTrip(); updateAddBtn(); drawPins(); toast("Trip cleared"); };
+$("fitTrip").onclick = () => trip.length && map.flyToBounds(L.latLngBounds(trip.map(p => [p.lat, p.lng])), { padding:[80,80], duration:1.2 });
+
+/* ---------- Search ---------- */
+let results = [], idx = -1, timer;
+function localSearch(q) {
+  q = q.toLowerCase();
+  return places.filter(p => p.name.toLowerCase().startsWith(q)).sort((a,b) => a.name.localeCompare(b.name)).slice(0, 8);
+}
+function renderSuggestions(q) {
+  const ul = $("suggestions");
+  ul.innerHTML = "";
+  if (!q) { ul.style.display = "none"; return; }
+  ul.style.display = "block";
+  if (!results.length) { ul.innerHTML = `<li class="empty">No places start with “${esc(q)}”</li>`; return; }
+  results.forEach((p, i) => {
+    const li = document.createElement("li");
+    li.className = i === idx ? "active" : "";
+    li.innerHTML = `<span class="dot" style="--c:${colorOf(p.category)}"></span><span><b>${esc(p.name.slice(0, q.length))}</b>${esc(p.name.slice(q.length))}</span><span class="cat">${esc(p.category)}</span>`;
+    li.onmousedown = () => pick(p);
+    ul.appendChild(li);
+  });
+}
+function pick(p) { $("search").value = p.name; $("suggestions").style.display = "none"; showCard(p); }
+
+$("search").addEventListener("input", e => {
+  clearTimeout(timer);
+  const q = e.target.value.trim();
+  timer = setTimeout(async () => {
+    if (!q) { results = []; return renderSuggestions(""); }
+    if (serverUp) {
+      try { results = await (await fetch(`${API}/search?q=${encodeURIComponent(q)}`)).json(); }
+      catch { results = localSearch(q); }
+    } else results = localSearch(q);
+    idx = -1; renderSuggestions(q);
+  }, 120);
+});
+$("search").addEventListener("keydown", e => {
+  if (e.key === "ArrowDown") { idx = (idx + 1) % results.length; renderSuggestions($("search").value.trim()); e.preventDefault(); }
+  else if (e.key === "ArrowUp") { idx = (idx - 1 + results.length) % results.length; renderSuggestions($("search").value.trim()); e.preventDefault(); }
+  else if (e.key === "Enter" && results.length) pick(results[Math.max(idx, 0)]);
+  else if (e.key === "Escape") $("suggestions").style.display = "none";
+});
+$("search").addEventListener("blur", () => setTimeout(() => $("suggestions").style.display = "none", 120));
+
+/* ---------- Theme & toast ---------- */
+$("themeBtn").onclick = () => {
+  const dark = document.documentElement.dataset.theme === "dark";
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  $("themeBtn").textContent = dark ? "☀️" : "🌙";
+};
+let tt;
+function toast(msg) {
+  $("toast").textContent = msg; $("toast").classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => $("toast").classList.remove("show"), 1800);
+}
+
+renderTrip();
+load();
+</script>
+</body>
+</html>

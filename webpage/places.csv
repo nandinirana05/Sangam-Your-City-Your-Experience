@@ -1,0 +1,101 @@
+id,user_id,category_id,name,description,latitude,longitude,created_at
+1,1,3,Robber's Cave (Gucchu Pani),"Natural limestone cave with a flowing stream, perfect for a short adventure.",30.3715,78.077,2026-10-09 13:37:48
+2,2,3,Sahastradhara,Thousand-fold sulphur springs and waterfalls with medicinal properties.,30.387,78.134,2026-10-09 13:37:48
+3,3,4,Forest Research Institute (FRI),Iconic colonial-era campus with museums and botanical gardens.,30.3426,77.9996,2026-10-09 13:37:48
+4,4,3,Mindrolling Monastery,One of Asia's largest Buddhist monasteries with a towering stupa.,30.267,78.006,2026-10-09 13:37:48
+5,5,3,Tapkeshwar Mahadev Temple,Ancient cave temple dedicated to Lord Shiva with a natural water drip.,30.341,78.012,2026-10-09 13:37:48
+6,6,5,Pacific Mall,Popular shopping and entertainment destination in Dehradun.,30.354,78.081,2026-10-09 13:37:48
+7,7,3,Lachhiwala Nature Park,Green picnic spot with natural water pools and dense forest.,30.2297,78.105,2026-10-09 13:37:48
+8,8,2,Café de Piccolo,"Cozy cafe known for coffee, snacks and relaxed conversations.",30.3256,78.0437,2026-10-09 13:37:48
+9,9,1,Kabila Restaurant,Casual restaurant serving a variety of North Indian dishes.,30.3165,78.0322,2026-10-09 13:37:48
+10,10,6,Hotel Madhuban,Comfortable centrally located hotel in Dehradun.,30.334,78.055,2026-10-09 13:37:48
+11,11,3,Gun Hill,Second highest peak of Mussoorie with panoramic Himalayan views and cable car.,30.4598,78.0644,2026-10-09 13:37:48
+12,12,3,Lal Tibba,Highest viewpoint in Mussoorie offering telescope views of snow peaks.,30.468,78.075,2026-10-09 13:37:48
+13,13,3,Kempty Falls,Popular waterfall cascade on the Mussoorie-Dehradun road.,30.488,78.012,2026-10-09 13:37:48
+14,14,3,Camel's Back Road,Scenic 3 km walking road shaped like a camel's hump.,30.455,78.07,2026-10-09 13:37:48
+15,15,5,Mussoorie Mall Road,"Bustling promenade with shops, cafes and valley views.",30.459,78.066,2026-10-09 13:37:48
+16,1,3,Company Garden,"Well-maintained garden with flowers, boating and children's park.",30.45,78.08,2026-10-09 13:37:48
+17,2,2,Cafe Ivy,Charming cafe in Landour popular among writers and travellers.,30.462,78.078,2026-10-09 13:37:48
+18,3,6,The Claridges Nabha,Heritage hotel with colonial charm and mountain views.,30.457,78.068,2026-10-09 13:37:48
+19,4,3,George Everest House,Historic home of Sir George Everest with stunning valley views.,30.445,78.055,2026-10-09 13:37:48
+20,5,9,Mussoorie Library,Old colonial library offering quiet reading spaces.,30.458,78.065,2026-10-09 13:37:48
+21,6,2,The Beatles Cafe,Iconic cafe near the Ganga associated with The Beatles' stay.,30.118,78.314,2026-10-09 13:37:48
+22,7,3,Laxman Jhula,Famous iron suspension bridge across the Ganga.,30.126,78.33,2026-10-09 13:37:48
+23,8,3,Ram Jhula,Another iconic suspension bridge connecting the two banks.,30.122,78.315,2026-10-09 13:37:48
+24,9,3,Triveni Ghat,Sacred ghat famous for evening Ganga Aarti.,30.103,78.294,2026-10-09 13:37:48
+25,10,6,Parmarth Niketan,"Large ashram offering yoga, meditation and riverside stay.",30.11,78.305,2026-10-09 13:37:48
+26,11,1,Chotiwala Restaurant Rishikesh,Popular pure-veg restaurant near the bridges.,30.12,78.32,2026-10-09 13:37:48
+27,12,3,Neer Waterfall,Scenic waterfall reachable by a short trek.,30.14,78.35,2026-10-09 13:37:48
+28,13,8,Adventure Point Shivpuri,Base for river rafting and bungee jumping.,30.08,78.38,2026-10-09 13:37:48
+29,14,2,Little Buddha Cafe,Relaxed riverside cafe with great views.,30.115,78.31,2026-10-09 13:37:48
+30,15,6,Hotel Mandakini,Comfortable hotel close to the Ganga.,30.105,78.295,2026-10-09 13:37:48
+31,1,5,Haldwani Mall Road,Main shopping stretch of the city.,29.218,79.513,2026-10-09 13:37:48
+32,2,3,Gaula River Side,Peaceful river bank area popular for evening walks.,29.225,79.52,2026-10-09 13:37:48
+33,3,1,Kumaoni Rasoi,Authentic Kumaoni cuisine restaurant.,29.22,79.515,2026-10-09 13:37:48
+34,4,6,Hotel Mandakini Haldwani,Well-located hotel for travellers heading to Nainital.,29.215,79.51,2026-10-09 13:37:48
+35,5,2,Cafe Hill View,Casual cafe popular with students and locals.,29.222,79.518,2026-10-09 13:37:48
+36,6,9,Haldwani Public Library,Quiet space for reading and studying.,29.217,79.512,2026-10-09 13:37:48
+37,7,3,Kathgodam Riverside,Scenic spot near the railway station.,29.265,79.545,2026-10-09 13:37:48
+38,8,5,City Centre Market,Local market for everyday shopping and street food.,29.219,79.514,2026-10-09 13:37:48
+39,9,4,Regional Science Centre,Interactive science exhibits for families.,29.23,79.525,2026-10-09 13:37:48
+40,10,1,Pahadi Kitchen,Restaurant specialising in mountain cuisine.,29.221,79.516,2026-10-09 13:37:48
+41,11,3,Har Ki Pauri,"Most sacred ghat of Haridwar, famous for Ganga Aarti.",29.9457,78.1642,2026-10-09 13:37:48
+42,12,1,Chotiwala Restaurant,Legendary pure-veg restaurant near Har Ki Pauri.,29.946,78.165,2026-10-09 13:37:48
+43,13,3,Mansa Devi Temple,Hilltop temple reachable by ropeway with panoramic views.,29.958,78.175,2026-10-09 13:37:48
+44,14,3,Chandi Devi Temple,Another important Shakti temple on Neel Parvat.,29.94,78.18,2026-10-09 13:37:48
+45,15,5,Haridwar Market (Upper Road),"Busy market for religious items, clothes and sweets.",29.947,78.166,2026-10-09 13:37:48
+46,1,6,Hotel Ganga Lahari,Riverside hotel close to the main ghats.,29.944,78.163,2026-10-09 13:37:48
+47,2,3,Daksh Prajapati Temple,Ancient temple complex in Kankhal.,29.93,78.15,2026-10-09 13:37:48
+48,3,2,Cafe Ganga View,Cafe overlooking the river near the aarti ghat.,29.9465,78.1645,2026-10-09 13:37:48
+49,4,9,Haridwar Public Library,Quiet reading space in the city.,29.95,78.17,2026-10-09 13:37:48
+50,5,1,Hoshiyarpuriwala,Famous for pure-veg thalis and sweets.,29.945,78.162,2026-10-09 13:37:48
+51,6,4,IIT Roorkee Campus,Historic engineering institute with beautiful colonial buildings.,29.864,77.896,2026-10-09 13:37:48
+52,7,3,Solani Aqueduct,Engineering marvel and scenic walkway over the Solani river.,29.855,77.89,2026-10-09 13:37:48
+53,8,5,Roorkee Market,Main local market for daily needs and street food.,29.854,77.888,2026-10-09 13:37:48
+54,9,1,Punjabi Dhaba Roorkee,Popular roadside eatery for travellers.,29.85,77.885,2026-10-09 13:37:48
+55,10,6,Hotel Polaris,Comfortable hotel near the railway station.,29.857,77.892,2026-10-09 13:37:48
+56,11,2,Cafe Campus,Student-favourite cafe near IIT.,29.862,77.895,2026-10-09 13:37:48
+57,12,9,Roorkee Central Library,Quiet library space.,29.853,77.887,2026-10-09 13:37:48
+58,13,3,Ganga Canal Side,Peaceful walk along the historic Ganga Canal.,29.848,77.88,2026-10-09 13:37:48
+59,14,1,Shahi Restaurant,Local favourite for North Indian meals.,29.856,77.889,2026-10-09 13:37:48
+60,15,8,Roorkee Gym & Fitness,Modern gym facility in the city.,29.851,77.886,2026-10-09 13:37:48
+61,1,3,Sidhbali Temple,Popular temple dedicated to Lord Hanuman on a hill.,29.75,78.53,2026-10-09 13:37:48
+62,2,3,Kanvashram,"Ancient ashram associated with sage Kanva, peaceful riverside spot.",29.76,78.54,2026-10-09 13:37:48
+63,3,5,Kotdwar Market,Main market of the town.,29.746,78.522,2026-10-09 13:37:48
+64,4,1,Garhwali Rasoi,Authentic Garhwali food restaurant.,29.748,78.525,2026-10-09 13:37:48
+65,5,6,Hotel Blue Star,Decent hotel for overnight stays.,29.745,78.52,2026-10-09 13:37:48
+66,6,2,Cafe Hills,Small cafe popular with locals.,29.747,78.523,2026-10-09 13:37:48
+67,7,3,Khoh River Side,Scenic river bank area.,29.755,78.535,2026-10-09 13:37:48
+68,8,9,Kotdwar Library,Quiet public library.,29.744,78.519,2026-10-09 13:37:48
+69,9,1,Pahadi Kitchen Kotdwar,Mountain cuisine restaurant.,29.749,78.524,2026-10-09 13:37:48
+70,10,3,Durgadhar Temple,Hilltop temple with nice views.,29.752,78.528,2026-10-09 13:37:48
+71,11,3,Bhimtal Lake,Beautiful lake perfect for boating and peaceful walks.,29.3444,79.563,2026-10-09 13:37:48
+72,12,3,Sattal Lake,Cluster of seven interconnected freshwater lakes.,29.35,79.52,2026-10-09 13:37:48
+73,13,3,Naukuchiatal,Nine-cornered lake ideal for quiet boating.,29.34,79.58,2026-10-09 13:37:48
+74,14,6,The Lake Resort Bhimtal,Lakeside resort with mountain views.,29.345,79.565,2026-10-09 13:37:48
+75,15,2,Cafe Lake View,Cafe overlooking Bhimtal Lake.,29.346,79.564,2026-10-09 13:37:48
+76,1,1,Kumaoni Kitchen Bhimtal,Local Kumaoni food restaurant.,29.343,79.562,2026-10-09 13:37:48
+77,2,3,Island Aquarium,Small island in Bhimtal Lake with aquarium.,29.344,79.5635,2026-10-09 13:37:48
+78,3,3,Hidimba Parvat,Hill offering panoramic views of the lake.,29.348,79.57,2026-10-09 13:37:48
+79,4,5,Bhimtal Market,Small local market near the lake.,29.342,79.561,2026-10-09 13:37:48
+80,5,9,Bhimtal Reading Room,Quiet space for travellers.,29.341,79.56,2026-10-09 13:37:48
+81,6,3,Naini Lake,The heart of Nainital – iconic lake for boating and lakeside walks.,29.3803,79.4636,2026-10-09 13:37:48
+82,7,5,Mall Road Nainital,"Bustling promenade with shops, cafes and lake views.",29.3919,79.4542,2026-10-09 13:37:48
+83,8,3,Snow View Point,Viewpoint reachable by ropeway with Himalayan vistas.,29.4,79.45,2026-10-09 13:37:48
+84,9,3,Naina Devi Temple,Sacred temple on the northern shore of Naini Lake.,29.392,79.455,2026-10-09 13:37:48
+85,10,3,Tiffin Top (Dorothy's Seat),Popular viewpoint and picnic spot.,29.385,79.44,2026-10-09 13:37:48
+86,11,6,The Naini Retreat,Heritage hotel with excellent lake views.,29.388,79.46,2026-10-09 13:37:48
+87,12,2,Cafe de Tavern,Popular cafe on Mall Road.,29.39,79.453,2026-10-09 13:37:48
+88,13,3,Eco Cave Gardens,Man-made cave complex and gardens.,29.395,79.47,2026-10-09 13:37:48
+89,14,1,Sakley's Restaurant,Classic restaurant serving continental and Indian food.,29.389,79.452,2026-10-09 13:37:48
+90,15,9,Nainital Club Library,Quiet colonial-era reading space.,29.387,79.458,2026-10-09 13:37:48
+91,1,3,Kandoliya Temple,Hilltop temple with panoramic views of the Himalayas.,30.16,78.78,2026-10-09 13:37:48
+92,2,3,Laxman Jhula View Point Pauri,Scenic viewpoint overlooking the valleys.,30.155,78.775,2026-10-09 13:37:48
+93,3,5,Pauri Market,Main local market of the town.,30.1526,78.7766,2026-10-09 13:37:48
+94,4,1,Garhwali Thali House,Authentic Garhwali meals.,30.153,78.777,2026-10-09 13:37:48
+95,5,6,Hotel Himalaya,Simple hotel with mountain views.,30.151,78.775,2026-10-09 13:37:48
+96,6,2,Cafe Himalayan,Small cafe popular with travellers.,30.154,78.778,2026-10-09 13:37:48
+97,7,3,Kyunkaleshwar Mahadev,Ancient Shiva temple with peaceful surroundings.,30.17,78.79,2026-10-09 13:37:48
+98,8,9,Pauri Public Library,Quiet library space.,30.15,78.774,2026-10-09 13:37:48
+99,9,3,Adwani Forest,Dense forest area good for short nature walks.,30.165,78.785,2026-10-09 13:37:48
+100,10,1,Pahadi Rasoi Pauri,Local mountain cuisine restaurant.,30.152,78.776,2026-10-09 13:37:48
