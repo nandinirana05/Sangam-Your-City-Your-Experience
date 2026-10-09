@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Wanderly – Explore & Plan</title>
+<title>Sangam – Explore & Plan</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
@@ -21,6 +21,11 @@
   html, body { height: 100%; margin: 0; }
   body { font-family: 'Poppins', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
   #map { position: absolute; inset: 0; z-index: 0; }
+
+  /* Dark map: invert the OpenStreetMap tiles */
+  [data-theme="dark"] .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(.9) contrast(.9) saturate(.6);
+  }
 
   .glass { background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-b); box-shadow: var(--shadow); border-radius: 18px; }
@@ -122,9 +127,9 @@
 
 <div id="top">
   <div class="bar glass">
-    <span class="logo">✦ Wanderly</span>
+    <span class="logo">✦ Sangam</span>
     <div id="searchWrap">
-      <input id="search" type="text" placeholder="Search places… try “rob”" autocomplete="off" />
+      <input id="search" type="text" placeholder="Search places… try “Naini”" autocomplete="off" />
       <ul id="suggestions"></ul>
     </div>
     <button class="icon-btn" id="tripBtn" title="My trip">🧭<span class="badge" id="badge">0</span></button>
@@ -158,24 +163,10 @@
 <script>
 const API = "http://localhost:8080";
 const COLORS = { Nature:"#34d399", Religious:"#f59e0b", Heritage:"#a78bfa", Landmark:"#38bdf8",
-                 Market:"#fb7185", Shopping:"#f472b6", Education:"#60a5fa", Locality:"#94a3b8" };
+                 Market:"#fb7185", Shopping:"#f472b6", Education:"#60a5fa", Adventure:"#f97316", Food:"#ef4444", Hotel:"#8b5cf6" };
 const colorOf = c => COLORS[c] || "#7c5cff";
 
-// Used when the C++ server isn't running
-const FALLBACK = [
-  {name:"Robber's Cave",lat:30.3877,lng:78.0654,category:"Nature"},
-  {name:"Sahastradhara",lat:30.3827,lng:78.1349,category:"Nature"},
-  {name:"Mindrolling Monastery",lat:30.2866,lng:78.0763,category:"Religious"},
-  {name:"Forest Research Institute",lat:30.3398,lng:77.9984,category:"Heritage"},
-  {name:"Clock Tower",lat:30.3245,lng:78.0420,category:"Landmark"},
-  {name:"Paltan Bazaar",lat:30.3212,lng:78.0409,category:"Market"},
-  {name:"Tapkeshwar Temple",lat:30.3350,lng:78.0010,category:"Religious"},
-  {name:"Malsi Deer Park",lat:30.3969,lng:78.0765,category:"Nature"},
-  {name:"Rajpur Road",lat:30.3445,lng:78.0600,category:"Market"},
-  {name:"Pacific Mall",lat:30.3267,lng:78.0430,category:"Shopping"},
-  {name:"Doon University",lat:30.2670,lng:77.9870,category:"Education"},
-  {name:"Parade Ground",lat:30.3231,lng:78.0393,category:"Landmark"}
-];
+const FALLBACK = []; // Empty since we want to force API connection
 
 let places = [], serverUp = false, activeCat = "All", selected = null, trip = [];
 const markers = new Map();
@@ -183,12 +174,8 @@ const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 /* ---------- Map ---------- */
-const map = L.map("map", { zoomControl:false }).setView([30.3165, 78.0322], 12);
-const TILES = {
-  dark:  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-  light: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-};
-let tileLayer = L.tileLayer(TILES.dark, { maxZoom: 19 }).addTo(map);
+const map = L.map("map", { zoomControl:false }).setView([29.5, 78.8], 8);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
 const pinLayer = L.layerGroup().addTo(map);
 let routeLine = L.polyline([], { color:"#22d3ee", weight:4, opacity:.9, dashArray:"10 10" }).addTo(map);
 
@@ -199,9 +186,9 @@ async function load() {
     places = await r.json();
     serverUp = true;
     $("status").textContent = `● Live · ${places.length} places (C++ server)`;
-  } catch {
-    places = FALLBACK;
-    $("status").textContent = `● Demo mode · ${places.length} places`;
+  } catch (e) {
+    console.error(e);
+    $("status").textContent = `● Error: Could not connect to C++ server`;
   }
   buildChips(); drawPins();
 }
@@ -335,9 +322,6 @@ $("themeBtn").onclick = () => {
   const dark = document.documentElement.dataset.theme === "dark";
   document.documentElement.dataset.theme = dark ? "light" : "dark";
   $("themeBtn").textContent = dark ? "☀️" : "🌙";
-  map.removeLayer(tileLayer);
-  tileLayer = L.tileLayer(TILES[dark ? "light" : "dark"], { maxZoom: 19 }).addTo(map);
-  tileLayer.bringToBack();
 };
 let tt;
 function toast(msg) {
