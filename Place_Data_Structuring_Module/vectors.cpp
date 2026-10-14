@@ -120,7 +120,7 @@ void filterByCategory(int categoryId) {
 
 //MAIN FUNCTION
 int main() {
-    string dbPath = "sangam.db";   // Make sure this file is in the same folder
+    string dbPath = "sangam.db";   
 
     //Load places from SQLite into Vector
     if (!loadPlacesFromDB(dbPath)) {
