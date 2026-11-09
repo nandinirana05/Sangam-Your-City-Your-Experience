@@ -1,0 +1,16 @@
+@echo off
+echo Compiling SQLite...
+gcc -O2 -c deps/sqlite/sqlite3.c -o sqlite3.o
+if %ERRORLEVEL% NEQ 0 (
+    echo SQLite compilation failed.
+    exit /b %ERRORLEVEL%
+)
+
+echo Compiling Sangam Core...
+g++ -std=c++17 -O2 -o sangam_core.exe src/cli/main.cpp sqlite3.o -I./deps/sqlite
+if %ERRORLEVEL% NEQ 0 (
+    echo Build failed.
+    exit /b %ERRORLEVEL%
+)
+
+echo Build successful! Run: python server.py
